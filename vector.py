@@ -35,19 +35,19 @@ class Vector:
             elif x > 0:
                 self.direction = 4
                 return Move.LEFT
-            else:
+            else:                   # can be removed
                 self.direction = 3
                 return Move.DOWN
         
         if self.direction == 2:
             if x < (l - 1) and self.can_overwrite(self.id, grid[y][x+1]):
                 return Move.RIGHT
-            elif y > 0:
-                self.direction = 3
-                return Move.DOWN
             elif y < (l - 1):
                 self.direction = 1
                 return Move.UP
+            elif y > 0:
+                self.direction = 3
+                return Move.DOWN
             else:
                 self.direction = 4
                 return Move.LEFT
@@ -55,25 +55,25 @@ class Vector:
         if self.direction == 3:
             if y > 0 and self.can_overwrite(self.id, grid[y-1][x]):
                 return Move.DOWN
-            elif x < (l - 1):
-                self.direction = 2
-                return Move.RIGHT
             elif x > 0:
                 self.direction = 4
                 return Move.LEFT
+            elif x < (l - 1):
+                self.direction = 2
+                return Move.RIGHT
             else:
                 self.direction = 1
                 return Move.UP
 
         if self.direction == 4:
-            if x > 0:
+            if x > 0 and self.can_overwrite(self.id, grid[y][x - 1]):
                 return Move.LEFT
-            elif y < (l - 1):
-                self.direction = 1
-                return Move.UP
             elif y > 0:
                 self.direction = 3
                 return Move.DOWN
+            elif y < (l - 1):
+                self.direction = 1
+                return Move.UP            
             else:
                 self.direction = 2
                 return Move.RIGHT
